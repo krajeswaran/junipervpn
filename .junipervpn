@@ -1,0 +1,10 @@
+[junipervpn]
+username = krajeswaran
+passwd = 
+pin = 1111
+ncui = ~/.juniper_networks/network_connect/ncui
+cert = ~/.juniper_networks/network_connect/ssl.crt
+url = https://webwork-maa.corp.ebay.com/dana-na/auth/url_default/login.cgi
+welcome_page_url = https://webwork-maa.corp.ebay.com/dana-na/auth/url_default/welcome.cgi
+realm = Secure ID
+
