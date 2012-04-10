@@ -29,23 +29,26 @@ Installation
 
 1. Install the following packages. Some packages might already be in your system, if they are you can safely ignore. Replace `sudo apt-get install` with your distro's package manager. 
 
-    sudo apt-get install build-essential gcc-multilib lib32z1 python-pip 
+    <pre><code>
+    sudo apt-get install build-essential gcc-multilib lib32z1 python-pip
     sudo pip install mechanize
+    </code></pre>
 
 2. Go to https://rex.corp.ebay.com, select your host and login like you would normally. This will download Juniper's network connect Java applet in `~/.juniper_networks/network_connect/`. Don't worry if you can't connect or the network connect doesn't lanuch. All we need from this step -- is for the files to be downloaed.
 
-3. Now, let's recompile this 32-bit binary to work on your 64-bit box. First cd into,
+3. Now, let's recompile this 32-bit binary to work on your 64-bit box. If you are already on a 32-bit box, just do(haven't tested this, feedback welcome) - ``gcc -Wl,-rpath,`pwd` -o ncui libncui.so``
 
+
+    <pre><code>
     cd ~/.juniper_networks/network_connect/
     gcc -m32 -Wl,-rpath,`pwd` -o ncui libncui.so
-
-If you are already on a 32-bit box, just do(haven't tested this, feedback welcome):
-
-    gcc -Wl,-rpath,`pwd` -o ncui libncui.so
+    </code></pre>
 
 4. Get the SSL certificate for your VPN host. Replace `your_host` with something like `webwork-maa.corp.ebay.com`
 
+    <pre><code>
     echo | openssl s_client -connect your_host:443 2>&1 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | openssl x509 -outform der > ssl.crt
+    </code></pre>
 
 5. Download this script and make sure it has the right permissions: `chmod a+x junipervpn.py`
 
