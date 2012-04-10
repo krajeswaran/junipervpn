@@ -6,7 +6,7 @@ Easy, automated python script for logging into VPN from Linux
 Credits
 =======
 
-Shamelessly lifted from http://makefile.com/.plan/2009/10/juniper-vpn-64-bit-linux-an-unsolved-mystery/
+Shamelessly lifted from http://makefile.com/.plan/2009/10/juniper-vpn-64-bit-linux-an-unsolved-mystery/.
 Also thanks to the excellent `mechanize` python library
 
 Why
@@ -37,7 +37,6 @@ Installation
 3. Now, let's recompile this 32-bit binary to work on your 64-bit box. First cd into,
 
     cd ~/.juniper_networks/network_connect/
-
     gcc -m32 -Wl,-rpath,`pwd` -o ncui libncui.so
 
 If you are already on a 32-bit box, just do(haven't tested this, feedback welcome):
@@ -51,5 +50,7 @@ If you are already on a 32-bit box, just do(haven't tested this, feedback welcom
 5. Download this script and make sure it has the right permissions: `chmod a+x junipervpn.py`
 
 6. Run it for the first time and create the config file - `./junipervpn.py -c`. Your config will be stored in a file called `.junipervpn`. There is a sample config file in this repo, you can use that for a reference.
+
+Now you are ready to go. Run the script, enter the 6-digit code for your secure token and you will be connected. There will be a prompt for password, which is harmless, you can ignore that.
 
 That's it! Enjoy.
