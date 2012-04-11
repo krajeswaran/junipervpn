@@ -104,15 +104,16 @@ class JuniperVPN:
         # set these values to true and uncomment if you want to debug what's going on
         self.browser.set_debug_http(False)
         self.browser.set_debug_responses(False)
+        self.browser.set_debug_redirects(False)
         #logger = logging.getLogger()
         #logger.addHandler(logging.StreamHandler(sys.stdout))
         #logger.setLevel(logging.INFO)
-        self.browser.set_debug_redirects(False)
         # emulate google chrome on linux
         self.browser.addheaders = [('User-agent', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.1 Safari/536.5')]
         # step.1 hit the homepage to get some cookies
         first_request = mechanize.Request(self.welcome_page_url)
-        self.cj.add_cookie_header(first_request)
+        first_response = mechanize.urlopen(first_request)
+        self.cj.extract_cookies(first_response, first_request)
         self.browser.set_cookiejar(self.cj)
         # step.2 now we are submitting the form with username and pin
         res = self.browser.open(self.url, loginData)
