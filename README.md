@@ -24,6 +24,11 @@ There are two issues which are kind of are the reasons for this hack:
 * Sun JRE packages are getting removed from repos of major distros. While the replacement - OpenJDK might work in future with Juniper, it doesn't work yet.
 * Juniper ships a 32-bit library and expects it to work on 64-bit. In other words, Juniper Networks doesn't really support 64-bit linux. So 64-bit linux needs workarounds OTB.
 
+Todo
+====
+
+* If host changes in config, auto-fetch ssl certificate for that host
+
 Installation
 ============
 
