@@ -62,3 +62,58 @@ Installation
 Now you are ready to go. Run the script, enter the 6-digit code for your secure token and you will be connected. There will be a prompt for password, which is harmless, you can ignore that.
 
 That's it! Enjoy.
+
+Ubuntu 12.04 issue
+------------------
+
+The problem is Juniper's VPN(ncsvc to be specific) tries to change `/etc/resolv.conf` and fails because it can't find the file. Ubuntu 12.04 LTS changes the way `resolv.conf` file works -- see http://www.stgraber.org/2012/02/24/dns-in-ubuntu-12-04/. This apparently is done by package `resolvconf`. 
+
+Way to keep things predictable on a LTS release! 
+
+So the easy way out is to remove the package - `sudo apt-get remove resolvconf` and create the file manually - `sudo touch /etc/resolv.conf`. 
+
+Now you can continue using the script the same way as before.
+
+ArchLinux
+=========
+
+Thanks to Atul Bhide for these instructions.
+Assuming you have logged in as `root`:
+
+1.       Download the latest JDK from oracle. Download the 64 bit JDK only. No need to download or use the 32-bit JDK. It is not needed.
+
+2.       `cd /opt`
+
+3.       `tar xvf /root/Downloads/jdk-7u3-linux-x64.tar.gz`
+
+4.       `ln –s /opt/jdk1.7.0_03 /opt/java`
+
+5.       `cd /usr/lib/Mozilla/plugins`
+
+6.       `ln –s /opt/java/jre/lib/amd64/libnpjp2.so`
+
+7.       Start firefox and log in to rex website. Follow through all the steps till Firefox show the final VPN success screen. This would have created `.juniper_networks` directory.
+
+8.       `vi /etc/pacman.conf` and edit the [multilib] section till it looks like this:
+
+[multilib]
+
+Include = /etc/pacman.d/mirrorlist
+
+9.       `pacman –Syy` = This will update the `multilib` db. Without it you won`t be able to download the 32 bit libs
+
+10.   `pacman –Syu` = Just a precaution but I recommend it.
+
+11.   `pacman –S lib32-gcc-libs lib32-glibc lib32-zlib`
+
+12.   Follow the rest from Kumaresan`s email.
+
+ 
+
+Note:
+
+1.       Make sure to do `modprobe tun` else VPN does not work
+
+2.       If you have installed python (3.X) version the python script does not work. So be careful.
+
+3.       You need to install pacman S python2-pip to correctly install the pip package
