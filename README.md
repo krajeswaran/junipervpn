@@ -1,7 +1,7 @@
 JuniperVPN
 ==========
 
-Easy, automated python script for logging into VPN from Linux
+Easy, automated python script for logging into Juniper VPN(Network Connect) from Linux
 
 Credits
 =======
